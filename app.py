@@ -3,6 +3,29 @@ from recomendador import generar_recomendacion
 from obtener_historia_pivote import obtener_historia_pivote
 
 app = Flask(__name__)
+DB_PATH = "hu_evaluations.db"
+
+# Crear base de datos si no existe
+if not os.path.exists(DB_PATH):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE evaluations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            description TEXT,
+            tecnica INTEGER,
+            desarrollo INTEGER,
+            dependencias INTEGER,
+            claridad INTEGER,
+            riesgos INTEGER,
+            total INTEGER,
+            fibonacci INTEGER,
+            recomendacion TEXT,
+            fecha TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
 
 # Escala Fibonacci
 fibonacci_scale = [0, 1, 2, 3, 5, 8, 13, 21]
