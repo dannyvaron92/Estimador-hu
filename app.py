@@ -4,6 +4,43 @@ from obtener_historia_pivote import obtener_historia_pivote
 
 import os
 
+
+import sqlite3
+from datetime import datetime
+
+# Guardar en historial_evaluaciones
+try:
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO historial_evaluaciones (
+            texto,
+            complejidad_tecnica,
+            esfuerzo_desarrollo,
+            dependencias_externas,
+            claridad_requisitos,
+            riesgos_incertidumbre,
+            puntaje_sugerido,
+            recomendacion,
+            fecha_evaluacion
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        hu_texto,
+        criterios["complejidad_tecnica"],
+        criterios["esfuerzo_desarrollo"],
+        criterios["dependencias_externas"],
+        criterios["claridad_requisitos"],
+        criterios["riesgos_incertidumbre"],
+        puntaje_sugerido,
+        mensaje,
+        datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    ))
+    conn.commit()
+    conn.close()
+except Exception as e:
+    return f"Error al guardar en historial: {e}", 500
+
+
 app = Flask(__name__)
 
 @app.route('/')
