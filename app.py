@@ -2,6 +2,8 @@ from flask import Flask, request, render_template
 from recomendador import generar_recomendacion
 from obtener_historia_pivote import obtener_historia_pivote
 
+import os
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -32,5 +34,8 @@ def evaluar_historia():
 
     return render_template('resultado.html', puntaje=puntaje_sugerido, mensaje=mensaje)
 
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Render asigna el puerto en PORT
+    app.run(host='0.0.0.0', port=port)
