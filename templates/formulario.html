@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evaluador de Historia de Usuario</title>
+</head>
+<body>
+    <h2>Ingresar Historia de Usuario</h2>
+    <form action="/evaluar" method="post">
+        <label>Historia de Usuario:</label><br>
+        <textarea name="hu" rows="4" cols="50" required></textarea><br><br>
+
+        <label>Complejidad Técnica:</label>
+        <input type="number" name="complejidad_tecnica" min="0" max="3" required><br>
+
+        <label>Esfuerzo de Desarrollo:</label>
+        <input type="number" name="esfuerzo_desarrollo" min="0" max="3" required><br>
+
+        <label>Dependencias Externas:</label>
+        <input type="number" name="dependencias_externas" min="0" max="3" required><br>
+
+        <label>Claridad de Requisitos:</label>
+        <input type="number" name="claridad_requisitos" min="0" max="3" required><br>
+
+        <label>Riesgos o Incertidumbre:</label>
+        <input type="number" name="riesgos_incertidumbre" min="0" max="3" required><br><br>
+
+        <button type="submit">Evaluar</button>
+    </form>
+</body>
+</html>
